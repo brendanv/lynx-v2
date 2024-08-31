@@ -1,7 +1,7 @@
 {
   "name": "Lynx Dev Container",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  
+
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
@@ -10,14 +10,97 @@
       "version": "latest"
     }
   },
-  
-  "forwardPorts": [5173, 8090],
-  
+
+  "forwardPorts": [3000, 5173],
+
   "postCreateCommand": "npm install -g pnpm && cd frontend && pnpm install && cd ../backend && go mod download",
-  
+
   "customizations": {
     "vscode": {
-      "extensions": []
+      "extensions": [
+        "golang.go",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "spmeesseman.vscode-taskexplorer"
+      ],
+      "settings": {
+        "go.toolsManagement.checkForUpdates": "local",
+        "go.useLanguageServer": true,
+        "go.gopath": "/go"
+      }
     }
+  },
+
+  "remoteUser": "vscode",
+
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ],
+
+  "workspaceFolder": "/workspace",
+
+  "postStartCommand": "echo 'Aliases created: start-backend, start-frontend' >> ~/.bashrc && echo 'alias start-backend=\"cd /workspace/backend && go run main.go serve --http 0.0.0.0:3000\"' >> ~/.bashrc && echo 'alias start-frontend=\"cd /workspace/frontend && npm run dev\"' >> ~/.bashrc && source ~/.bashrc",
+
+  "portsAttributes": {
+    "3000": {
+      "label": "Backend",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "Frontend",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Backend",
+        "type": "shell",
+        "command": "cd /workspace/backend && go run main.go serve --http 0.0.0.0:3000",
+        "isBackground": true,
+        "problemMatcher": [
+          {
+            "pattern": [
+              {
+                "regexp": ".",
+                "file": 1,
+                "location": 2,
+                "message": 3
+              }
+            ],
+            "background": {
+              "activeOnStart": true,
+              "beginsPattern": ".",
+              "endsPattern": "."
+            }
+          }
+        ]
+      },
+      {
+        "label": "Start Frontend",
+        "type": "shell",
+        "command": "cd /workspace/frontend && npm run dev",
+        "isBackground": true,
+        "problemMatcher": [
+          {
+            "pattern": [
+              {
+                "regexp": ".",
+                "file": 1,
+                "location": 2,
+                "message": 3
+              }
+            ],
+            "background": {
+              "activeOnStart": true,
+              "beginsPattern": ".",
+              "endsPattern": "."
+            }
+          }
+        ]
+      }
+    ]
   }
 }
