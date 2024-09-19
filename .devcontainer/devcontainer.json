@@ -17,7 +17,7 @@
     }
   },
   "postCreateCommand": "cd backend/ && go mod download && cd ../frontend && npm install && echo VITE_POCKETBASE_URL=https://${CODESPACE_NAME}-3000.app.github.dev/ >> .env",
-  "customization": {
+  "customizations": {
     "codespaces": {
       "openFiles": [
         "frontend/.env"
@@ -40,7 +40,7 @@
             "command": "cd frontend/ && npm run dev"
           },
           "title": "Lynx Frontend"
-        },
+        }
       ]
     }
   }
