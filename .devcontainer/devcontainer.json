@@ -2,8 +2,7 @@
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/go:1": {},
-    "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   "forwardPorts": [3000, 5173],
   "portsAttributes": {
@@ -21,26 +20,6 @@
     "codespaces": {
       "openFiles": [
         "frontend/.env"
-      ]
-    },
-    "vscode": {
-      "settings": {},
-      "extensions": [],
-      "commands": [
-        {
-          "command": "workbench.action.terminal.newWithCommand",
-          "args": {
-            "command": "cd backend/ && go run main.go serve --http 0.0.0.0:3000"
-          },
-          "title": "Lynx Backend"
-        },
-        {
-          "command": "workbench.action.terminal.newWithCommand",
-          "args": {
-            "command": "cd frontend/ && npm run dev"
-          },
-          "title": "Lynx Frontend"
-        }
       ]
     }
   }
