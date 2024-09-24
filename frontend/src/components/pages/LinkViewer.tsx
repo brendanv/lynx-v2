@@ -10,6 +10,7 @@ import { FullBleedPageWithHeader } from "@/components/pages/PageWithHeader";
 import React from "react";
 import { usePocketBase } from "@/hooks/usePocketBase";
 import TagsMultiSelect from "@/components/TagsMultiSelect";
+import ReactMarkdown from "react-markdown";
 
 const ProgressIndicator: React.FC<{ progress: number }> = ({ progress }) => (
   <div className="w-full h-1 bg-gray-200 fixed bottom-0 left-0 z-50">
@@ -197,11 +198,10 @@ const ArticleView: React.FC<{
           {linkView.excerpt && (
             <p className="text-gray-600 italic mb-4">{linkView.excerpt}</p>
           )}
-          {linkView.article_html && (
-            <div
-              className="prose prose-lg lg:prose-xl dark:prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: linkView.article_html }}
-            />
+          {linkView.article_markdown && (
+            <div className="prose prose-lg lg:prose-xl dark:prose-invert max-w-none">
+              <ReactMarkdown>{linkView.article_markdown}</ReactMarkdown>
+            </div>
           )}
         </div>
       </article>

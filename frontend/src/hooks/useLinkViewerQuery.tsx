@@ -24,6 +24,7 @@ export type LinkView = {
   cleaned_url: string | null;
   article_html: string | null;
   reading_progress: number | null;
+  article_markdown: string | null;
 };
 
 const useLinkViewerQuery = (
@@ -79,6 +80,7 @@ const runQuery = async (
     article_html: string | null;
     reading_progress: number | null;
     title: string | null;
+    article_markdown: string | null;
   }>(id, {
     expand: "tags",
     fields: [
@@ -96,6 +98,7 @@ const runQuery = async (
       "article_html",
       "reading_progress",
       "expand.tags.*",
+      "article_markdown",
     ].join(","),
     headers: updateLastViewedAt ? { "X-Lynx-Update-Last-Viewed": "true" } : {},
   });
