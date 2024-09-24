@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	md "github.com/JohannesKaufmann/html-to-markdown"
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
@@ -148,6 +149,18 @@ func InitializePocketbase(app core.App) {
 		routine.FireAndForget(func() {
 			convertFeedItemToLinkFunc(app, e.Model.GetId())
 		})
+		return nil
+	})
+
+	app.OnRecordViewRequest("links").Add(func(e *core.RecordViewEvent) error {
+		e.Record.WithUnknownData(true)
+		converter := md.NewConverter("", true, nil)
+		markdown, err := converter.ConvertString(e.Record.GetString("article_html"))
+		if err != nil {
+			log.Fatal(err)
+		} else {
+			e.Record.Set("article_markdown", markdown)
+		}
 		return nil
 	})
 }
