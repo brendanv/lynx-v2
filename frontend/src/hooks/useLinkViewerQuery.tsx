@@ -1,5 +1,6 @@
 import { usePocketBase } from "@/hooks/usePocketBase";
 import type Tag from "@/types/Tag";
+import type { BasicHighlight } from "@/types/Highlight";
 import Client from "pocketbase";
 import { useEffect, useState } from "react";
 
@@ -24,6 +25,7 @@ export type LinkView = {
   cleaned_url: string | null;
   article_html: string | null;
   reading_progress: number | null;
+  highlights: BasicHighlight[];
 };
 
 const useLinkViewerQuery = (
@@ -69,7 +71,7 @@ const runQuery = async (
     article_date: string | null;
     author: string | null;
     excerpt: string | null;
-    expand?: { tags: Tag[] };
+    expand?: { tags: Tag[]; highlights_via_link: BasicHighlight[] };
     header_image_url: string | null;
     hostname: string | null;
     last_viewed_at: string | null;
@@ -80,7 +82,7 @@ const runQuery = async (
     reading_progress: number | null;
     title: string | null;
   }>(id, {
-    expand: "tags",
+    expand: "tags,highlights_via_link",
     fields: [
       "id",
       "article_date",
@@ -96,6 +98,8 @@ const runQuery = async (
       "article_html",
       "reading_progress",
       "expand.tags.*",
+      "expand.highlights_via_link.id",
+      "expand.highlights_via_link.highlighted_text",
     ].join(","),
     headers: updateLastViewedAt ? { "X-Lynx-Update-Last-Viewed": "true" } : {},
   });
@@ -114,6 +118,10 @@ const runQuery = async (
             name,
             slug,
           }))
+        : [],
+    highlights:
+      queryResult.expand && queryResult.expand.highlights_via_link
+        ? queryResult.expand.highlights_via_link
         : [],
   };
 };
