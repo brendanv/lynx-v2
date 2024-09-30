@@ -6,9 +6,11 @@
   </picture>
 </p>
 
-![frontend-ci](https://github.com/brendanv/lynx/actions/workflows/frontend-tests.yml/badge.svg) ![backend-ci](https://github.com/brendanv/lynx/actions/workflows/backend-tests.yml/badge.svg)
-
 Lynx is an easily self-hostable read-it-later service that lets you save articles or passages in the moment and get back to reading them later (eventually). Never worry about losing access to articles due to link rot, as all article content is parsed and saved locally.
+
+![MIT license](https://img.shields.io/github/license/brendanv/lynx) ![latest release](https://img.shields.io/github/v/release/brendanv/lynx
+) ![commits since last release](https://img.shields.io/github/commits-since/brendanv/lynx/latest
+) ![frontend-ci](https://github.com/brendanv/lynx/actions/workflows/frontend-tests.yml/badge.svg) ![backend-ci](https://github.com/brendanv/lynx/actions/workflows/backend-tests.yml/badge.svg)
 
 # Features
 
