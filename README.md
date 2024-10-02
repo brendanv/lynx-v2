@@ -12,6 +12,10 @@ Lynx is an easily self-hostable read-it-later service that lets you save article
 ) ![commits since last release](https://img.shields.io/github/commits-since/brendanv/lynx/latest
 ) ![frontend-ci](https://github.com/brendanv/lynx/actions/workflows/frontend-tests.yml/badge.svg) ![backend-ci](https://github.com/brendanv/lynx/actions/workflows/backend-tests.yml/badge.svg)
 
+<picture>
+  <img src="resources/dark_light_feed.png">
+</picture>
+
 # Features
 
 - Save links quickly and easily, using the web UI or via a single API call.
@@ -25,6 +29,10 @@ Lynx is an easily self-hostable read-it-later service that lets you save article
   - Plus, multi-user support so friends and family can save their own links.
 - SQLite backend (powered by [Pocketbase](https://technology.riotgames.com/news/taxonomy-tech-debt)) for limited dependencies and great performance.
 - Light- and dark-mode support out of the box.
+
+<picture>
+  <img src="resources/dark_light_article.png">
+</picture>
 
 # Installation
 
