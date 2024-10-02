@@ -1,0 +1,24 @@
+version: "3.4"
+services:
+  lynx:
+    image: ghcr.io/brendanv/lynx:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    # OPTIONAL - Uncomment if you want to enable the singlefile
+    # integration to save archives in your Lynx instance.
+    #
+    # environment:
+    #   SINGLEFILE_URL: http://singlefile:80
+    volumes:
+      - ./pb_data:/app/pb_data
+
+  # OPTIONAL - Uncomment if you want to enable the singlefile
+  # integration to save archives in your Lynx instance.
+  #
+  # singlefile:
+  #   image: ghcr.io/brendanv/lynx-singlefile:latest
+  #   entrypoint: python3
+  #   command: webserver.py
+  #   expose:
+  #     - 80
