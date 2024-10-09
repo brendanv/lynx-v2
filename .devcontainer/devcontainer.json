@@ -1,0 +1,26 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "forwardPorts": [3000, 5173],
+  "portsAttributes": {
+    "3000": {
+      "label": "Backend",
+      "onAutoForward": "openBrowserOnce"
+    },
+    "5173": {
+      "label": "Frontend",
+      "onAutoForward": "openBrowserOnce"
+    }
+  },
+  "postCreateCommand": "cd backend/ && go mod download && cd ../frontend && npm install && echo VITE_POCKETBASE_URL=https://${CODESPACE_NAME}-3000.app.github.dev/ >> .env",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "frontend/.env"
+      ]
+    }
+  }
+}
